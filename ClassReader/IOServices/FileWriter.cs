@@ -1,11 +1,6 @@
 ﻿using ClassReader.Interfaces;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 
 namespace ClassReader.IOServices
@@ -43,7 +38,7 @@ namespace ClassReader.IOServices
 			var tree = CSharpSyntaxTree.ParseText(text);
 			var fileName = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First().Identifier.Text;
 			var filePath = Path.Combine(path, fileName + ".cs");
-			using StreamWriter outputFile = File.AppendText(filePath);
+			using var outputFile = new StreamWriter(filePath);
 			return outputFile.WriteAsync(text);
 		}
 

@@ -53,7 +53,7 @@ namespace ClassReader.IOServices
 			return new TransformBlock<string, string>(ReadFileAsync, opt);
 		}
 
-		private static Task<string> ReadFileAsync(string path)
+		private static async Task<string> ReadFileAsync(string path)
 		{
 			if (!File.Exists(path))
 			{
@@ -63,12 +63,12 @@ namespace ClassReader.IOServices
 			var fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.None, 4096,
 				FileOptions.Asynchronous);
 			using var reader = new StreamReader(fs, Encoding.UTF8);
-			return reader.ReadToEndAsync();
+			return await reader.ReadToEndAsync();
 		}
 
 		public void StartPipeline(string input)
 		{
-			startBlock.Post(input);
+			startBlock.Post(input); 
 			startBlock.Complete();
 		}
 	}

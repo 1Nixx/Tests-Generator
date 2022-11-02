@@ -2,14 +2,14 @@
 using ClassReader.IOServices;
 using Core;
 
-const string input = @"C:\Универ\5 Семестр\СПП\Лаба 4\input";
-const string output = @"C:\Универ\5 Семестр\СПП\Лаба 4\output";
+const string input = @"C:\Универ\5 Семестр\СПП\Лаба 4\Tests Generator\ClassReader\input";
+const string output = @"C:\Универ\5 Семестр\СПП\Лаба 4\Tests Generator\ClassReader\output";
 
 var pipeline = new PipeLineCreator();
 
-pipeline.AddSourseItem(new FileReader(5));
-pipeline.AddItem(new TestGeneratorService(5));
-pipeline.AddTargetItem(new FileWriter(5, output));
+pipeline.AddSourseItem(new FileReader(10));
+pipeline.AddItem(new TestGeneratorService(10));
+pipeline.AddTargetItem(new FileWriter(10, output));
 
 pipeline.Run(input);
 
