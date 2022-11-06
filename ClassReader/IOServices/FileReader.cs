@@ -31,13 +31,13 @@ namespace ClassReader.IOServices
 			return reader;
 		}
 
-		private static TransformManyBlock<string, string> CreateReadDirectoryBlock()
+		private TransformManyBlock<string, string> CreateReadDirectoryBlock()
 		{
 			var opt = new ExecutionDataflowBlockOptions();
 			return new TransformManyBlock<string, string>(ReadDirectory, opt);
 		}
 
-		private static string[] ReadDirectory(string path)
+		private string[] ReadDirectory(string path)
 		{
 			if (!Directory.Exists(path))
 			{
@@ -47,13 +47,13 @@ namespace ClassReader.IOServices
 			return Directory.EnumerateFiles(path).ToArray();
 		}
 
-		private static TransformBlock<string, string> CreateReadFileBlock(int maxFiles)
+		private TransformBlock<string, string> CreateReadFileBlock(int maxFiles)
 		{
 			var opt = new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = maxFiles };
 			return new TransformBlock<string, string>(ReadFileAsync, opt);
 		}
 
-		private static async Task<string> ReadFileAsync(string path)
+		private async Task<string> ReadFileAsync(string path)
 		{
 			if (!File.Exists(path))
 			{

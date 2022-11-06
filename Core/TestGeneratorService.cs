@@ -26,13 +26,13 @@ namespace Core
 			return generator;
 		}
 
-		private static TransformManyBlock<string, string> CreateGenerateTestBlock(int maxThreads)
+		private TransformManyBlock<string, string> CreateGenerateTestBlock(int maxThreads)
 		{
 			var opt = new ExecutionDataflowBlockOptions { MaxDegreeOfParallelism = maxThreads };
 			return new TransformManyBlock<string, string>(CreateTests, opt);
 		}
 
-		private static string[] CreateTests(string code)
+		private string[] CreateTests(string code)
 		{
 			var classes = CSharpSyntaxTree.ParseText(code).GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>()
 				.Where(@class => @class.Modifiers.Any(SyntaxKind.PublicKeyword))
@@ -41,7 +41,7 @@ namespace Core
 			return classes.Select(CreateTest).ToArray();
 		}
 
-		private static readonly List<UsingDirectiveSyntax> DefaultLoadDirectiveList = new()
+		private readonly List<UsingDirectiveSyntax> DefaultLoadDirectiveList = new()
 		{
 			SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System")),
 			SyntaxFactory.UsingDirective(SyntaxFactory.ParseName("System.Collections.Generic")),
@@ -51,7 +51,7 @@ namespace Core
 		};
 		private const string Tab = "\t";
 
-		private static string CreateTest(TypeDeclarationSyntax classDeclaration)
+		private  string CreateTest(TypeDeclarationSyntax classDeclaration)
 		{
 			var unit = SyntaxFactory.CompilationUnit();
 			unit = DefaultLoadDirectiveList.Aggregate(unit,
@@ -99,7 +99,7 @@ namespace Core
 			return unit.NormalizeWhitespace().AddMembers(@namespace).ToFullString();
 		}
 
-		private static MemberDeclarationSyntax[] AddTestMethods(SyntaxNode classDeclaration)
+		private MemberDeclarationSyntax[] AddTestMethods(SyntaxNode classDeclaration)
 		{
 			var methods = classDeclaration.DescendantNodes().OfType<MethodDeclarationSyntax>()
 				.Where(method => method.Modifiers.Any(SyntaxKind.PublicKeyword));

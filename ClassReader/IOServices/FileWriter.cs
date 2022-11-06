@@ -24,7 +24,7 @@ namespace ClassReader.IOServices
 			return writer;
 		}
 
-		private static ActionBlock<string> CreateWriteFileBlock(int maxFiles, string path)
+		private ActionBlock<string> CreateWriteFileBlock(int maxFiles, string path)
 		{
 			if (!Directory.Exists(path))
 				Directory.CreateDirectory(path);
@@ -33,7 +33,7 @@ namespace ClassReader.IOServices
 			return new ActionBlock<string>(text => WriteFileAsync(path, text), opt);
 		}
 
-		private static Task WriteFileAsync(string path, string text)
+		private Task WriteFileAsync(string path, string text)
 		{
 			var tree = CSharpSyntaxTree.ParseText(text);
 			var fileName = tree.GetRoot().DescendantNodes().OfType<ClassDeclarationSyntax>().First().Identifier.Text;
