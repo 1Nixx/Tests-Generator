@@ -33,8 +33,7 @@ namespace ClassReader.IOServices
 
 		private TransformManyBlock<string, string> CreateReadDirectoryBlock()
 		{
-			var opt = new ExecutionDataflowBlockOptions();
-			return new TransformManyBlock<string, string>(ReadDirectory, opt);
+			return new TransformManyBlock<string, string>(ReadDirectory);
 		}
 
 		private string[] ReadDirectory(string path)
