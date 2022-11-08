@@ -63,7 +63,7 @@ namespace Tests
 		[Test]
 		public async Task TestGeneratorWithFullClass()
 		{
-			var writeText = File.ReadAllText(@"C:\Универ\5 Семестр\СПП\Лаба 4\Tests Generator\Tests\input\Test1.cs");
+			var writeText = File.ReadAllText(@"..\..\..\input\Test1.cs");
 			var item = _testGenerator.GetItem();
 
 			item.Post(writeText);
@@ -89,7 +89,7 @@ namespace Tests
 		[Test]
 		public async Task TestGeneratorWithEmptyClass()
 		{
-			var writeText = File.ReadAllText(@"C:\Универ\5 Семестр\СПП\Лаба 4\Tests Generator\Tests\TestClasses\ClassWithoutMethods.cs");
+			var writeText = File.ReadAllText(@"..\..\..\TestClasses\ClassWithoutMethods.cs");
 			var item = _testGenerator.GetItem();
 
 			item.Post(writeText);

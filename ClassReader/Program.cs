@@ -2,8 +2,8 @@
 using ClassReader.IOServices;
 using Core;
 
-const string input = @"C:\Универ\5 Семестр\СПП\Лаба 4\Tests Generator\Tests\input";
-const string output = @"C:\Универ\5 Семестр\СПП\Лаба 4\Tests Generator\Tests\output";
+const string input = @"..\..\..\..\..\Tests Generator\Tests\input";
+const string output = @"..\..\..\..\..\Tests Generator\Tests\output";
 
 var pipeline = new PipeLineCreator();
 
